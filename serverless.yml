@@ -60,19 +60,17 @@ provider:
 functions:
   hello:
     handler: handler.hello
-      events:
+    events:
       - http:
-         path: users/create
-         method: get
-
-
-
-
-
-
-
-
-
+          path: /
+          method: get
+functions:          
+  whatsapp:        
+    handler: handler.whatsApp       
+    events:
+      - http:
+          path: /whatsapp
+          method: get     
 
 
 #      - websocket: $connect

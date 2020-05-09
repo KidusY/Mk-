@@ -13,11 +13,15 @@ export const ValidateName = (Name) => {
 export const ValidateEmail = (email) => {
 	const Message = {
 		ErrorMessage : '',
-		bool         : false
+		bool         : true
 	};
 
 	if (email.length === 0) {
 		Message.ErrorMessage = 'Please Enter Email';
+		Message.bool = false;
+	}
+	else {
+		Message.ErrorMessage = '';
 		Message.bool = true;
 	}
 	return Message;
@@ -26,12 +30,35 @@ export const ValidateEmail = (email) => {
 export const ValidateMessage = (message) => {
 	const Message = {
 		ErrorMessage : '',
-		bool         : false
+		bool         : true
 	};
 
 	if (message.length === 0) {
 		Message.ErrorMessage = 'Please Enter Message';
+		Message.bool = false;
+	}
+	else {
+		Message.ErrorMessage = '';
 		Message.bool = true;
 	}
+
+	return Message;
+};
+
+export const ValidatePassword = (password) => {
+	const Message = {
+		ErrorMessage : '',
+		bool         : true
+	};
+
+	if (password.length === 0) {
+		Message.ErrorMessage = 'Please Enter Password';
+		Message.bool = false;
+	}
+	else {
+		Message.ErrorMessage = '';
+		Message.bool = true;
+	}
+
 	return Message;
 };
