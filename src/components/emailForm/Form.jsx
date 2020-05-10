@@ -13,10 +13,24 @@ class Form extends React.Component {
 	constructor () {
 		super();
 		this.state = {
-			ErrorMessage : '',
-			NameBool     : true,
-			EmailBool    : true,
-			messageBool  : true,
+		
+			EmailBool    : {
+				bool:false,
+				ErrorMessage:""
+			},
+			PasswordBool :{
+				bool:false,
+				ErrorMessage:""
+			},
+			NameBool     :{
+				bool:false,
+				ErrorMessage:''
+			} ,
+		
+			MessageBool :{
+				bool:false,
+				ErrorMessage:''
+			}, 
 			email        : {
 				name    : '',
 				email   : '',
@@ -26,13 +40,7 @@ class Form extends React.Component {
 	}
 
 	render () {
-		let disabelBtn = true;
-		if (!this.state.messageBool) {
-			disabelBtn = true;
-		}
-		else {
-			disabelBtn = false;
-		}
+
 		return (
 			<Container component='main' maxWidth='xs'>
 				<CssBaseline />
@@ -49,7 +57,7 @@ class Form extends React.Component {
 						}}
 					>
 						<h1>Contact us </h1>
-						{!this.state.EmailBool && <FormHelperText>{this.state.ErrorMessage}</FormHelperText>}
+						{!this.state.EmailBool.bool && <FormHelperText>{this.state.EmailBool.ErrorMessage}</FormHelperText>}
 						<TextField
 							variant='outlined'
 							margin='normal'
@@ -62,10 +70,10 @@ class Form extends React.Component {
 							autoFocus
 							onChange={() => {
 								const error = ValidateEmail(document.querySelector('#email').value);
-								this.setState({ ErrorMessage: error.ErrorMessage, EmailBool: error.bool });
+								this.setState({ EmailBool: error });
 							}}
 						/>
-						{!this.state.NameBool && <FormHelperText>{this.state.ErrorMessage}</FormHelperText>}
+						{!this.state.NameBool.bool && <FormHelperText>{this.state.NameBool.ErrorMessage}</FormHelperText>}
 						<TextField
 							variant='outlined'
 							margin='normal'
@@ -76,18 +84,10 @@ class Form extends React.Component {
 							id='name'
 							onChange={() => {
 								const error = ValidateName(document.querySelector('#name').value);
-								this.setState({ ErrorMessage: error.ErrorMessage, NameBool: error.bool });
+								this.setState({NameBool: error });
 							}}
 						/>
-						<TextField
-							variant='outlined'
-							margin='normal'
-							fullWidth
-							name='subject'
-							label='subject'
-							id='subject'
-						/>
-						{!this.state.messageBool && <FormHelperText>{this.state.ErrorMessage}</FormHelperText>}
+					{!this.state.MessageBool.bool && <FormHelperText>{this.state.MessageBool.ErrorMessage}</FormHelperText>}
 						<TextareaAutosize
 							className={'textArea'}
 							aria-label='minimum height'
@@ -96,11 +96,11 @@ class Form extends React.Component {
 							placeholder='Message'
 							onChange={() => {
 								const error = ValidateMessage(document.querySelector('#message').value);
-								this.setState({ ErrorMessage: error.ErrorMessage, messageBool: error.bool });
+								this.setState({ MessageBool: error });
 							}}
 						/>
 
-						<Button type='submit' variant='contained' color='primary' disabled={disabelBtn}>
+						<Button type='submit' variant='contained' color='primary' disabled={!this.state.EmailBool.bool || !this.state.NameBool.bool}>
 							send
 						</Button>
 					</form>

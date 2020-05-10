@@ -13,9 +13,14 @@ export default class SignIn extends React.Component {
 	constructor () {
 		super();
 		this.state = {
-			ErrorMessage : '',
-			EmailBool    : true,
-			PasswordBool : true,
+			EmailBool    : {
+				bool:false,
+				ErrorMessage:""
+			},
+			PasswordBool :{
+				bool:false,
+				ErrorMessage:""
+			} ,
 
 			login        : {
 				email    : '',
@@ -24,6 +29,9 @@ export default class SignIn extends React.Component {
 		};
 	}
 	render () {
+
+		
+
 		return (
 			<Container component='main' maxWidth='xs'>
 				<CssBaseline />
@@ -48,7 +56,7 @@ export default class SignIn extends React.Component {
 							}
 						}}
 					>
-						{!this.state.EmailBool && <FormHelperText>{this.state.ErrorMessage}</FormHelperText>}
+						{!this.state.EmailBool.bool && <FormHelperText>{this.state.EmailBool.ErrorMessage}</FormHelperText>}
 						<TextField
 							variant='outlined'
 							margin='normal'
@@ -61,10 +69,10 @@ export default class SignIn extends React.Component {
 							autoFocus
 							onChange={() => {
 								const error = ValidateEmail(document.querySelector('#email').value);
-								this.setState({ ErrorMessage: error.ErrorMessage, EmailBool: error.bool });
+								this.setState({ EmailBool: error });
 							}}
 						/>
-						{!this.state.PasswordBool && <FormHelperText>{this.state.ErrorMessage}</FormHelperText>}
+						{!this.state.PasswordBool.bool && <FormHelperText>{this.state.PasswordBool.ErrorMessage}</FormHelperText>}
 						<TextField
 							variant='outlined'
 							margin='normal'
@@ -77,11 +85,11 @@ export default class SignIn extends React.Component {
 							autoComplete='current-password'
 							onChange={() => {
 								const error = ValidatePassword(document.querySelector('#password').value);
-								this.setState({ ErrorMessage: error.ErrorMessage, PasswordBool: error.bool });
+								this.setState({ PasswordBool: error });
 							}}
 						/>
 
-						<Button type='submit' fullWidth variant='contained' color='primary'>
+						<Button type='submit' fullWidth variant='contained' color='primary' disabled={!this.state.PasswordBool.bool || !this.state.EmailBool.bool}>
 							Sign In
 						</Button>
 					</form>
