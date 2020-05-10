@@ -89,8 +89,22 @@ export default class SignIn extends React.Component {
 							}}
 						/>
 
-						<Button type='submit' fullWidth variant='contained' color='primary' disabled={!this.state.PasswordBool.bool || !this.state.EmailBool.bool}>
+						<Button className="btnSubmit" type='submit' 
+						 variant='contained' color='primary'
+						  disabled={!this.state.PasswordBool.bool || !this.state.EmailBool.bool}>
 							Sign In
+						</Button>
+
+						<Button className="btnRegister"  
+						 variant='contained' color='primary'
+						  disabled={!this.state.PasswordBool.bool || !this.state.EmailBool.bool}
+						  onClick={()=>{
+							const email = document.querySelector('#email').value;
+							const passWord = document.querySelector('#password').value;
+							this.props.Register(email,passWord);
+						  }}
+						  >
+							Register
 						</Button>
 					</form>
 				</div>

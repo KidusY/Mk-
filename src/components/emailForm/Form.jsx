@@ -49,10 +49,9 @@ class Form extends React.Component {
 						onSubmit={(e) => {
 							e.preventDefault();
 							const Name = document.querySelector('#name').value;
-							const Subject = document.querySelector('#subject').value;
 							const Email = document.querySelector('#email').value;
 							const Message = document.querySelector('#message').value;
-							email(Name, Subject, Email, Message);
+							email(Name, Email, Message);
 							this.props.history.push('/messageSent');
 						}}
 					>
@@ -100,7 +99,7 @@ class Form extends React.Component {
 							}}
 						/>
 
-						<Button type='submit' variant='contained' color='primary' disabled={!this.state.EmailBool.bool || !this.state.NameBool.bool}>
+						<Button type='submit' variant='contained' color='primary' disabled={!this.state.EmailBool.bool}>
 							send
 						</Button>
 					</form>

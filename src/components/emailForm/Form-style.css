@@ -1,5 +1,5 @@
 form {
-	margin-top: 10px;
+	margin-top: 5px;
 	text-align: center;
 }
 
@@ -20,4 +20,14 @@ form {
 }
 .textArea:active {
 	border: 1px solid rgba(53, 32, 122, 0.219);
+}
+.btnSubmit{
+	width:100px;
+	margin: 10px !important; 
+
+}
+.btnRegister{
+	width:100px;
+	margin: 10px !important;
+
 }

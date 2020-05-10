@@ -35,22 +35,43 @@ class App extends React.Component {
 	};
 
 	loginCheck = (email, password) => {
+		this.fetchData();
+
+console.log(this.state);
+let flag= false;
 		for (const iterator of this.state.userInfo) {
+		
 			if (email.toLowerCase() === iterator.email && password === iterator.password) {
+				console.log("hello")
 				this.setState({ login: true });
+				flag=true;
 				return true;
 			}
 			else {
-				return false;
+				flag= false;
 			}
+			console.log(flag);
 		}
+		return flag;
 	};
 
+	Register= async (email,password)=>{
+		
+       await axios.post("https://3117myzmak.execute-api.us-west-2.amazonaws.com/default/createUser",{
+		 api_key:"11111111111111111111",
+		 
+			 email:email,
+			 password:password
+		 
+	   })
+	   this.fetchData();
+	}
 	render () {
+		
 		return (
 			<div className='App'>
 				<img src={logo} className='logo' alt='Mk' />
-				<Route exact path='/' component={(props) => <Login {...props} loginCheck={this.loginCheck} />} />
+				<Route exact path='/' component={(props) => <Login {...props} loginCheck={this.loginCheck} Register={this.Register} />} />
 				{this.state.login && <Route exact path='/form' component={(props) => <Form {...props} />} />}
 				<Route exact path='/loginError' component={(props) => <LoginError {...props} />} />
 				<Route exact path='/messageSent' component={(props) => <MessageSent {...props} />} />
